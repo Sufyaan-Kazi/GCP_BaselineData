@@ -1,3 +1,7 @@
+# Misc
+.DS_Store
+*.swp
+
 # Compiled class file
 *.class
 
