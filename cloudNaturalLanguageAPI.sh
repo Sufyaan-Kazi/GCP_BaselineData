@@ -7,8 +7,8 @@
 # https://google.qwiklabs.com/focuses/109?parent=catalog
 # https://google.qwiklabs.com/focuses/115?parent=catalog
 
-PROJECT_ID=suf-tradetech
-SCRIPT_NAME=suf-gcp-tests
+PROJECT_ID=`gcloud config list project --format "value(core.project)"`
+SCRIPT_NAME=suf-gcloud-nlp
 
 SERVICE_ACC=$SCRIPT_NAME@$PROJECT_ID
 KEY_FILE=$PROJECT_ID-$SCRIPT_NAME.json
@@ -30,12 +30,13 @@ enableAPIS() {
   gcloud services enable speech.googleapis.com
 }
 
-#gcloud auth login
+gcloud auth login
 gcloud config set project $PROJECT_ID
 enableAPIS
 createServiceAccount
 
 echo "Calling Natural Language API"
+# analyzeEntities analyzeEntitySentiment analyzeSentiment analyzeSyntax annotateText classifyText
 curl "https://language.googleapis.com/v1/documents:analyzeEntities" -s -X POST -H "Content-Type: application/json" -H "Authorization: Bearer $API_KEY" --data-binary @nlp_request.json
 sleep 5
 
