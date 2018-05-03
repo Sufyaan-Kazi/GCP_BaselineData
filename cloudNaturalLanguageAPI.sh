@@ -13,6 +13,15 @@ SCRIPT_NAME=suf-gcloud-nlp
 SERVICE_ACC=$SCRIPT_NAME@$PROJECT_ID
 KEY_FILE=$PROJECT_ID-$SCRIPT_NAME.json
 
+enableAPIIfNecessary() {
+  API_EXISTS=`gcloud services list | grep $1 | wc -l`
+
+  if [ $API_EXISTS -eq 0 ]
+  then
+    gcloud services enable $1
+  fi
+}
+
 createServiceAccount() {
   # Alternately set the API Key env to value defined in the Console (Credntials, Create Credentials)
   gcloud iam service-accounts create $SCRIPT_NAME --display-name=$SCRIPT_NAME
@@ -24,10 +33,10 @@ createServiceAccount() {
 }
 
 enableAPIS() {
-  gcloud services enable iam.googleapis.com
-  gcloud services enable cloudresourcemanager.googleapis.com
-  gcloud services enable language.googleapis.com
-  gcloud services enable speech.googleapis.com
+  enableAPIIfNecessary iam.googleapis.com
+  enableAPIIfNecessary cloudresourcemanager.googleapis.com
+  enableAPIIfNecessary language.googleapis.com
+  enableAPIIfNecessary speech.googleapis.com
 }
 
 gcloud auth login
