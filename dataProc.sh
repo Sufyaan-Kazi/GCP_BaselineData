@@ -19,9 +19,9 @@ enableAPIIfNecessary() {
 
 enableAPIIfNecessary dataproc.googleapis.com
 
-gcloud dataproc clusters create example-cluster --num-workers=5 --zone=europe-west2-b
+gcloud dataproc clusters create example-cluster --num-workers=2 --zone=europe-west2-b
 gcloud dataproc jobs submit spark --cluster example-cluster   --class org.apache.spark.examples.SparkPi   --jars file:///usr/lib/spark/examples/jars/spark-examples.jar -- 1000
 
-#gcloud dataproc clusters update example-cluster --num-workers 2
+#gcloud dataproc clusters update example-cluster --num-workers 5
 
 #gcloud dataproc clusters delete example-cluster -q
