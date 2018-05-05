@@ -6,7 +6,8 @@
 # It spins up a DataProc cluster and starts a PSark job to calculate Pi
 # How the job calculates Pi: The Spark job estimates a value of Pi using the Monte Carlo method. It generates x,y points on a coordinate plane that models a circle enclosed by a unit square.
 # The input argument (1000) determines the number of x,y pairs to generate; the more pairs generated, the greater the accuracy of the estimation.
-# This estimation leverages Cloud Dataproc worker nodes to parallelize the computation. For more information, see Estimating Pi using the Monte Carlo Method and see JavaSparkPi.java on GitHub.
+# This estimation leverages Cloud Dataproc worker nodes to parallelize the computation.
+# For more information, see Estimating Pi using the Monte Carlo Method and see JavaSparkPi.java on GitHub.
 
 enableAPIIfNecessary() {
   API_EXISTS=`gcloud services list | grep $1 | wc -l`
