@@ -22,3 +22,6 @@ gcloud dataproc jobs submit spark --cluster example-cluster   --class org.apache
 #gcloud dataproc clusters update example-cluster --num-workers 5
 
 gcloud dataproc clusters delete example-cluster -q
+
+#TO DO
+Add logic to delete the dataproc buckets 
