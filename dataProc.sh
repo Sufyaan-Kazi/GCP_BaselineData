@@ -9,14 +9,7 @@
 # This estimation leverages Cloud Dataproc worker nodes to parallelize the computation.
 # For more information, see Estimating Pi using the Monte Carlo Method and see JavaSparkPi.java on GitHub.
 
-enableAPIIfNecessary() {
-  API_EXISTS=`gcloud services list | grep $1 | wc -l`
-
-  if [ $API_EXISTS -eq 0 ]
-  then
-    gcloud services enable $1
-  fi
-}
+. ./common.sh
 
 enableAPIIfNecessary dataproc.googleapis.com
 
