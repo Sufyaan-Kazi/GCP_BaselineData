@@ -4,7 +4,10 @@
 # Date: April 2018
 # Purpose: Demonstrate the ability to spin up (and down) a DataProc cluster
 # It spins up a DataProc cluster and starts a PSark job to calculate Pi
-# How the job calculates Pi: The Spark job estimates a value of Pi using the Monte Carlo method. It generates x,y points on a coordinate plane that models a circle enclosed by a unit square.
+# How the job calculates Pi: The Spark job estimates a value of Pi using the Monte Carlo method.
+# It generates x,y points on a coordinate plane that models a circle enclosed by a unit square.
+# Once the job completes, click on it's logs, turn on line wrapping and you will see Pi calculated!
+#
 # The input argument (1000) determines the number of x,y pairs to generate; the more pairs generated, the greater the accuracy of the estimation.
 # This estimation leverages Cloud Dataproc worker nodes to parallelize the computation.
 # For more information, see Estimating Pi using the Monte Carlo Method and see JavaSparkPi.java on GitHub.
