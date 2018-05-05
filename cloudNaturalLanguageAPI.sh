@@ -8,7 +8,7 @@
 # https://google.qwiklabs.com/focuses/115?parent=catalog
 
 PROJECT_ID=`gcloud config list project --format "value(core.project)"`
-SCRIPT_NAME=suf-gcloud-nlp
+SCRIPT_NAME=gcloud-nlp
 
 SERVICE_ACC=$SCRIPT_NAME@$PROJECT_ID
 KEY_FILE=$PROJECT_ID-$SCRIPT_NAME.json
@@ -39,7 +39,7 @@ enableAPIS() {
   enableAPIIfNecessary speech.googleapis.com
 }
 
-gcloud auth login
+#gcloud auth login
 gcloud config set project $PROJECT_ID
 enableAPIS
 createServiceAccount
@@ -53,7 +53,7 @@ echo "Calling Speech API"
 gcloud ml speech recognize 'gs://cloud-samples-tests/speech/brooklyn.flac' --language-code='en-US'
 sleep 5
 
-gcloud auth login
+#gcloud auth login
 # Deleting Service Account
 gcloud iam service-accounts delete -q $SERVICE_ACC.iam.gserviceaccount.com
 
