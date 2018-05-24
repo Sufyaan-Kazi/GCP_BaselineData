@@ -1,7 +1,7 @@
 https://twitter.com/Sufyaan_Kazi
 
 # GCP_Baseline
-Automation for the https://google.qwiklabs.com/quests/34 quests. Run these in CloudShell, or for example in Terminal on OSX, with gcloud installed.
+This is a collection of shell automations for google qwiklab courses. To run these, either download the gcloud CLI to your machine, or just log into CloudShell directly within the GCP console, and clone this github repo.
 
 Run cloudNaturalLanguageAPI.sh to see how to use both a service account and CURL to call either the Google ML NLP or peech APIs.
 
