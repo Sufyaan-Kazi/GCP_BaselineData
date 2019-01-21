@@ -29,7 +29,7 @@
 
 . ./common.sh
 
-enableAPIIfNecessary dataproc.googleapis.com
+enableAPIs dataproc.googleapis.com
 
 gcloud dataproc clusters create example-cluster --num-workers=2 --zone=europe-west2-b
 gcloud dataproc jobs submit spark --cluster example-cluster   --class org.apache.spark.examples.SparkPi   --jars file:///usr/lib/spark/examples/jars/spark-examples.jar -- 1000
@@ -39,4 +39,4 @@ gcloud dataproc jobs submit spark --cluster example-cluster   --class org.apache
 gcloud dataproc clusters delete example-cluster -q
 
 #TO DO
-Add logic to delete the dataproc buckets 
+#Add logic to delete the dataproc buckets 
