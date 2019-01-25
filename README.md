@@ -1,4 +1,4 @@
-[comment]: <> Copyright 2018 Google LLC. This software is provided as-is, without warranty or representation for any use or purpose. Your use of it is subject to your agreements with Google.
+[comment]: <> (Copyright 2018 Google LLC. This software is provided as-is, without warranty or representation for any use or purpose. Your use of it is subject to your agreements with Google.)
 
 https://twitter.com/Sufyaan_Kazi
 
