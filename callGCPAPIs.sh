@@ -31,9 +31,11 @@ main() {
   local PROJECT_ID=$(gcloud config list project --format "value(core.project)")
   local SCRIPT_NAME=gcloud-ml
   local SERVICE_ACC=svcacc-$SCRIPT_NAME@$PROJECT_ID
-  local KEY_FILE=~/keys/$PROJECT_ID-$SCRIPT_NAME.json
+  local KEY_FILE=~/keys/$SERVICE_ACC.json
   local ROLES=roles/viewer
   local AUDIO_FILE=cloud-samples-tests/speech/brooklyn.flac
+  BUCKET=cloud-samples-tests
+  IMAGE_PATH=vision/text.jpg
 
   #Enable required GCP apis
   enableAPIs $APIS
@@ -42,7 +44,7 @@ main() {
   # Get the current active authorised account, because we are also using
   # curl, we need to switch authorised accounts, then switch back after
   echo "Determining current GCP account"
-  local ACTIVE_ACC=$(gcloud auth list | grep '*' | xargs | cut -d " " -f2)
+  export ACTIVE_ACC=$(gcloud auth list | grep '*' | xargs | cut -d " " -f2)
   echo "You are currently logged into GCP as: $ACTIVE_ACC"
   printf "******\n\n"
 
@@ -55,7 +57,7 @@ main() {
   printf "******\n\n"
 
   echo "Detect Text in an image using vision API"
-  gcloud ml vision detect-text 'gs://cloud-samples-tests/vision/text.jpg' > /tmp/vision_out.json
+  gcloud ml vision detect-text "gs://$BUCKET/$IMAGE_PATH" > /tmp/vision_out.json
   echo "Vision output written to /tmp/vision_out.json"
   printf "******\n\n"
 
@@ -87,4 +89,5 @@ trap 'abort' 0
 SECONDS=0
 main
 trap : 0
+gcloud config set account $ACTIVE_ACC
 echo "Script completed in ${SECONDS} seconds."
