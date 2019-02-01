@@ -30,7 +30,7 @@ main() {
   local APIS="iam cloudresourcemanager language speech vision"
   local PROJECT_ID=$(gcloud config list project --format "value(core.project)")
   local SCRIPT_NAME=gcloud-ml
-  local SERVICE_ACC=$SCRIPT_NAME@$PROJECT_ID
+  local SERVICE_ACC=svcacc-$SCRIPT_NAME@$PROJECT_ID
   local KEY_FILE=~/keys/$PROJECT_ID-$SCRIPT_NAME.json
   local ROLES=roles/viewer
   local AUDIO_FILE=cloud-samples-tests/speech/brooklyn.flac
