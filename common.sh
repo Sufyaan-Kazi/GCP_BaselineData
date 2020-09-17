@@ -100,3 +100,38 @@ createServiceAccount() {
   echo ${GOOGLE_APPLICATION_CREDENTIALS}
   echo GOOGLE_APPLICATION_CREDENTIAL=${GOOGLE_APPLICATION_CREDENTIALS}
 }
+
+#Remove the Service Account named in vars.txt (SERVICE_ACC)
+# - It checks to see if the service account exists in the project
+# - Assuming it does, it removes the policy bindings for any roles listed in vars.txt for this service account
+# - Then it deletes the service account
+removeServiceAcc(){
+  printf "\n*** Removing Service Account ${SERVICE_ACC} ***\n"
+
+  #Remove permissions from the bucket
+  echo "Removing permissions on gs://${SRC_BUCKET_NAME}"
+  gsutil -m acl ch -R -d ${SERVICE_ACC}.iam.gserviceaccount.com gs://${SRC_BUCKET_NAME}/ > /dev/null 2>&1
+
+  #
+  # Remove Service Account Roles
+  #
+  SERVICE_ACC_ROLES_EXIST=$(gcloud projects get-iam-policy ${PROJECT_ID} | grep ${SERVICE_ACC}.iam.gserviceaccount.com | wc -l)
+  if [ $SERVICE_ACC_ROLES_EXIST -ne 0 ]
+  then
+    declare -a roles=(${SERVICE_ACC_ROLES})
+    for role in "${roles[@]}"
+    do
+      echo "Removing role: ${role} for service account: $SERVICE_ACC"
+      gcloud projects remove-iam-policy-binding ${PROJECT_ID} --member "serviceAccount:${SERVICE_ACC}.iam.gserviceaccount.com" --role "${role}" --quiet > /dev/null || true
+    done
+  fi
+
+  #
+  # Remove Service Account
+  #
+  SERVICE_ACC_EXISTS=$(gcloud iam service-accounts list | grep $SERVICE_ACC | wc -l)
+  if [ $SERVICE_ACC_EXISTS -ne 0 ]
+  then
+    gcloud iam service-accounts delete ${SERVICE_ACC}.iam.gserviceaccount.com -q
+  fi
+}
