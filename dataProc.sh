@@ -29,10 +29,11 @@
 # This estimation leverages Cloud Dataproc worker nodes to parallelize the computation.
 # For more information, see Estimating Pi using the Monte Carlo Method and see JavaSparkPi.java on GitHub.
 
-. ./common.sh
+#. ./common.sh
 
-enableAPIs dataproc.googleapis.com
+#enableAPIs dataproc.googleapis.com
 
+gcloud config set dataproc/region europe-west2
 gcloud dataproc clusters create example-cluster --num-workers=2 --zone=europe-west2-b
 gcloud dataproc jobs submit spark --cluster example-cluster   --class org.apache.spark.examples.SparkPi   --jars file:///usr/lib/spark/examples/jars/spark-examples.jar -- 1000
 
